@@ -23,7 +23,7 @@ const Videos = ({ videos }) => {
                             key={index}>
                             {item.id.videoId && <VideoCard videoContent={item} />}
                             {item.id.channelId && <ChannelCard channelContent={item} />}
-                            {/* {item.id.playlistId && <PlaylistCard playlistContent={item} />} */}
+                            {/* {item.id.playlistId && <span style={{ display: 'none' }}></span>} */}
                         </div>
                     )
                 )

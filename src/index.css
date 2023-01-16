@@ -4,7 +4,9 @@
 :root {
     --bg-color: #141026;
     --elements-color: #312a51;
+    /* --elements-color: rgb(0, 119, 255); */
     --theme-color: #57CEE7;
+    /* --theme-color: rgb(16, 16, 16); */
     --border-radius: 5px;
 }
 
@@ -44,7 +46,7 @@ a {
 }
 
 .category-btn:hover {
-    background-color: #2D375A !important;
+    background-color: rgb(0, 43, 93) !important;
     color: white !important;
 }
 
