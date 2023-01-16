@@ -6,12 +6,14 @@ import { fetchAPI } from '../utils/fetchAPI'
 
 const Feed = () => {
 
-    const [selectedCategory, setSelectedCategory] = useState('New')
+    const [selectedCategory, setSelectedCategory] = useState('Latest')
     const [videos, setVideos] = useState([])
     useEffect(() => {
         fetchAPI(`search?part=snippet&q=${selectedCategory}`)
             .then((data) => setVideos(data.items))
     }, [selectedCategory])
+
+    console.log(videos);
 
     return (
         <Stack
@@ -30,6 +32,7 @@ const Feed = () => {
                         md: '92vh'
                     },
                     borderRight: '1px solid #2D375A',
+
                     px: {
                         sx: 0,
                         md: 2

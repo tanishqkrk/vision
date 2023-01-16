@@ -1,6 +1,7 @@
 import { Stack } from '@mui/material '
 import { Link } from 'react-router-dom'
 import SearchBar from './SearchBar'
+// import logo from '../../public/logo.svg'
 
 const Navbar = () => {
     return (
@@ -14,7 +15,7 @@ const Navbar = () => {
             sx={{ position: 'sticky', background: '#04103A', top: 0, justifyContent: 'space-between', zIndex: 9 }}
         >
             <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-                <img src="./logo.svg" height={45} alt="logo" />
+                <img src='/logo.svg' height={45} alt="logo" />
             </Link>
             <SearchBar></SearchBar>
         </Stack>
