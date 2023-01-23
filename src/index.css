@@ -272,3 +272,22 @@ a {
 .navbar-logo {
     display: none !important;
 }
+
+
+.loading-page {
+    color: white;
+}
+
+.subcount {
+    color: rgba(255, 255, 255, 0.43);
+    text-align: center;
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.channelDesc {
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    /* margin: 0; */
+    font-size: 1.1em;
+}

@@ -6,10 +6,21 @@ import { SearchRounded } from '@mui/icons-material'
 // import {SearchIcon} from SearchOffOutlined
 
 const SearchBar = () => {
+
+    const [searchTerm, setSearchTerm] = useState('')
+    const navigate = useNavigate();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (searchTerm) {
+            navigate(`/search/${searchTerm}`)
+        }
+        setSearchTerm('')
+
+    }
     return (
         <Paper
             component="form"
-            onSubmit={() => { }}
+            onSubmit={handleSubmit}
             sx={{
                 borderRadius: 1,
                 pl: 2,
@@ -22,8 +33,8 @@ const SearchBar = () => {
                 type="text"
                 className='search-bar'
                 placeholder='Search'
-                value=""
-                onChange={() => { }}
+                onChange={(e) => { setSearchTerm(e.currentTarget.value); }}
+                value={searchTerm}
                 style={{
                     background: '#2D375A',
                     color: 'white'

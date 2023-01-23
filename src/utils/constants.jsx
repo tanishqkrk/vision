@@ -14,10 +14,11 @@ import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
 
 export const categories = [
     { name: 'Latest', icon: <HomeIcon />, },
-    { name: 'ThePrimeagen', icon: <CodeIcon />, },
+    { name: 'PewDiePie', icon: <CodeIcon />, },
     { name: 'Fireship', icon: <CodeIcon />, },
     { name: 'ReactJS', icon: <CodeIcon />, },
     { name: 'NextJS', icon: <CodeIcon />, },
+    { name: 'ThePrimeagen', icon: <CodeIcon />, },
     { name: 'Music', icon: <MusicNoteIcon /> },
     { name: 'Education', icon: <SchoolIcon />, },
     { name: 'Podcast', icon: <GraphicEqIcon />, },

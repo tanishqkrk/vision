@@ -1,14 +1,22 @@
 import { Link } from 'react-router-dom';
 
 const ChannelCard = ({ channelContent }) => {
-    console.log(channelContent);
+
+    const channelURL = () => {
+        if (channelContent?.id?.channelId === undefined) {
+            return (channelContent?.id)
+        }
+        else {
+            return (channelContent?.id?.channelId)
+        }
+    }
     return (
-        <Link to={`/channel/${channelContent?.id?.channelId}`}>
+        <Link to={`/channel/${channelURL()}`}>
             <div className="channel-img">
                 <img src={channelContent.snippet.thumbnails.high.url} alt="" className="channel-img-img" />
             </div>
             <h1 className="channel-title">
-                {channelContent.snippet.channelTitle}
+                {channelContent.snippet.title}
             </h1>
         </Link>
     )
