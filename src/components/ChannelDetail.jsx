@@ -4,6 +4,7 @@ import { Box } from "@mui/material"
 import Videos from './Videos'
 import ChannelCard from './ChannelCard'
 import { fetchAPI } from '../utils/fetchAPI'
+import Loader from "./Loader"
 
 
 const ChannelDetail = () => {
@@ -44,7 +45,7 @@ const ChannelDetail = () => {
 
     if (isLoadingChannelDetail) {
         return (
-            <Box minHeight="95vh" className="loading-page">Loading</Box>
+            <Loader />
         )
     }
     // console.log(videos);
