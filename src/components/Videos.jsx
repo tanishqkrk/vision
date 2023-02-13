@@ -9,8 +9,9 @@ const Videos = ({ videos }) => {
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        videos && setLoaded(true)
+        videos && setLoaded(true);
     }, [])
+
 
     const videosContainer = useRef();
     return (

@@ -64,7 +64,9 @@ const VideoDetail = () => {
                                 More like what you just watched:
                             </Typography>
                             <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems="center" >
-                                <Videos videos={videos} direction="column" />
+                                {videos !== undefined ? <Videos videos={videos} direction="column" /> :
+                                    <Typography textAlign={"center"} p={2} style={{ background: "rgb(0, 119, 255)" }} variant="body1" fontWeight={600} color="#fff">
+                                        We're sorry for the inconvenience. The API which is providing this data is not functioning properly anymore. We're migrating to a newer API so you can enjoy unlimited content!</Typography>}
                             </Box>
                         </Box>
                     </Box>
