@@ -10,6 +10,55 @@
     --border-radius: 5px;
 }
 
+.alert {
+    width: 50%;
+    /* margin: 20px 10px; */
+    padding: 20px;
+    /* position: relative; */
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0px #ccc;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    color: red;
+    background-color: rgb(255, 237, 237);
+    border-right: 5px solid red;
+    animation: disappear 10s linear;
+    opacity: 0;
+}
+
+.alert h3 {
+    margin: 0;
+}
+
+@keyframes disappear {
+    0% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    opacity: 0.5;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 50%;
+    right: 15px;
+    top: 25px;
+    text-align: center;
+    font-size: 1.6em;
+    cursor: pointer;
+}
 
 * {
     transition: .3s;

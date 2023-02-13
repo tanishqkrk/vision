@@ -15,11 +15,17 @@ const VideoDetail = () => {
     const [isVideosLoading, setIsVideosLoading] = useState(true)
 
     useEffect(() => {
+
+    }, [videoDetail])
+
+    useEffect(() => {
         fetchAPI(`videos?part=snippet,statistics&id=${id}`)
             .then((data) => {
-                console.log(data);
                 setIsVideoDetailLoading(false)
-                setVideoDetail(data.items[0])
+                !isVideoDetailLoading && setVideoDetail(data.items[0])
+            })
+            .catch((err) => {
+                console.log(err);
             })
 
     }, [id])
@@ -28,59 +34,69 @@ const VideoDetail = () => {
         fetchAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
             .then((data) => {
                 setIsVideosLoading(false)
-                setVideos(data.items)
+                !isVideosLoading && setVideos(data.items)
+            })
+            .catch((err) => {
+                console.log(err);
             })
     }, [id])
 
-    if (videoDetail || videos) {
-        const { snippet: { title, channelId, channelTitle }, statistics: { viewCount, likeCount } } = videoDetail
-        return (
-            <Box minHeight="95vh">
-                <scrollToTop />
-                <Stack direction={{
-                    xs: 'column',
-                    md: 'row'
-                }}>
-                    <Box flex={1}>
-                        <Box sx={{ width: '100%' }}>
-                            <ReactPlayer controls className='react-player' url={`https://www.youtube.com/embed/${id}`} />
-                            <Typography color="#fff" variant="h5" fontWeight='bold' p={2}> {title} </Typography>
-                            <Stack direction="row" justifyContent="space-between" sx={{ color: '#fff' }} py={1} px={2}>
-                                <Link to={`/channel/${channelId}`}>
-                                    <Typography variant={{ sm: 'subtitle1', md: 'h6' }} color='#fff'>
-                                        {channelTitle}
-                                    </Typography>
-                                </Link>
-                                <Stack direction="row" gap="20px" alignItems="center">
+    if (!isVideoDetailLoading) {
+        if (videoDetail) {
+            const { snippet: { title, channelId, channelTitle }, statistics: { viewCount, likeCount } } = videoDetail
+            return (
+                <Box minHeight="95vh">
+                    <scrollToTop />
+                    <Stack direction={{
+                        xs: 'column',
+                        md: 'row'
+                    }}>
+                        <Box flex={1}>
+                            <Box sx={{ width: '100%' }}>
+                                <ReactPlayer controls className='react-player' url={`https://www.youtube.com/embed/${id}`} />
+                                <Typography color="#fff" variant="h5" fontWeight='bold' p={2}> {title} </Typography>
+                                <Stack direction="row" justifyContent="space-between" sx={{ color: '#fff' }} py={1} px={2}>
+                                    <Link to={`/channel/${channelId}`}>
+                                        <Typography variant={{ sm: 'subtitle1', md: 'h6' }} color='#fff'>
+                                            {channelTitle}
+                                        </Typography>
+                                    </Link>
+                                    <Stack direction="row" gap="20px" alignItems="center">
 
-                                    <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                                        {parseInt(viewCount).toLocaleString()} views
-                                    </Typography>
-                                    <Typography variant="body1" sx={{ opacity: 0.7 }}>
-                                        {parseInt(likeCount).toLocaleString()} likes
-                                    </Typography>
+                                        <Typography variant="body1" sx={{ opacity: 0.7 }}>
+                                            {parseInt(viewCount).toLocaleString()} views
+                                        </Typography>
+                                        <Typography variant="body1" sx={{ opacity: 0.7 }}>
+                                            {parseInt(likeCount).toLocaleString()} likes
+                                        </Typography>
+                                    </Stack>
                                 </Stack>
-                            </Stack>
-                            <Typography p={2} variant="body1" fontWeight={600} color="#fff">
-                                More like what you just watched:
-                            </Typography>
-                            <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems="center" >
-                                {videos !== undefined ? <Videos videos={videos} direction="column" /> :
-                                    <Typography textAlign={"center"} p={2} style={{ background: "rgb(0, 119, 255)" }} variant="body1" fontWeight={600} color="#fff">
-                                        We're sorry for the inconvenience. The API which is providing this data is not functioning properly anymore. We're migrating to a newer API so you can enjoy unlimited content!</Typography>}
+                                <Typography p={2} variant="body1" fontWeight={600} color="#fff">
+                                    More like what you just watched:
+                                </Typography>
+                                <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems="center" >
+                                    {/* {!isVideoDetailLoading && <Videos videos={videos} direction="column" />} */}
+                                    {!isVideoDetailLoading && videos ? <Videos videos={videos} direction="column" /> :
+                                        <Typography textAlign={"center"} p={2} style={{ background: "rgb(0, 119, 255)" }} variant="body1" fontWeight={600} color="#fff">
+                                            We're sorry for the inconvenience. The API which is providing this data is not functioning properly anymore. We're migrating to a newer API so you can enjoy unlimited content!</Typography>}
+                                </Box>
                             </Box>
                         </Box>
-                    </Box>
-                </Stack>
-            </Box>
-        )
+                    </Stack>
+                </Box>
+            )
+        }
     }
     else if (!videoDetail) {
-        <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems="center" >
-            {videos !== undefined ? <Videos videos={videos} direction="column" /> :
-                <Typography textAlign={"center"} p={2} style={{ background: "rgb(0, 119, 255)" }} variant="body1" fontWeight={600} color="#fff">
-                    We're sorry for the inconvenience. The API which is providing this data is not functioning properly anymore. We're migrating to a newer API so you can enjoy unlimited content!</Typography>}
-        </Box>
+        return (
+            <Box minHeight="95vh">
+                <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems="center" >
+                    {videos !== undefined ? <Videos videos={videos} direction="column" /> :
+                        <Typography textAlign={"center"} p={2} style={{ background: "rgb(0, 119, 255)" }} variant="body1" fontWeight={600} color="#fff">
+                            We're sorry for the inconvenience. The API which is providing this data is not functioning properly anymore. We're migrating to a newer API so you can enjoy unlimited content!</Typography>}
+                </Box>
+            </Box>
+        )
     }
     else {
         return (
