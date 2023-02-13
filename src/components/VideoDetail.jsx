@@ -14,15 +14,12 @@ const VideoDetail = () => {
     const [videos, setVideos] = useState(null);
     const [isVideosLoading, setIsVideosLoading] = useState(true)
 
-    useEffect(() => {
-
-    }, [videoDetail])
 
     useEffect(() => {
         fetchAPI(`videos?part=snippet,statistics&id=${id}`)
             .then((data) => {
                 setIsVideoDetailLoading(false)
-                !isVideoDetailLoading && setVideoDetail(data.items[0])
+                setVideoDetail(data.items[0])
             })
             .catch((err) => {
                 console.log(err);
@@ -34,7 +31,7 @@ const VideoDetail = () => {
         fetchAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
             .then((data) => {
                 setIsVideosLoading(false)
-                !isVideosLoading && setVideos(data.items)
+                setVideos(data.items)
             })
             .catch((err) => {
                 console.log(err);
@@ -42,7 +39,7 @@ const VideoDetail = () => {
     }, [id])
 
     if (!isVideoDetailLoading) {
-        if (videoDetail) {
+        if (videoDetail && !isVideosLoading) {
             const { snippet: { title, channelId, channelTitle }, statistics: { viewCount, likeCount } } = videoDetail
             return (
                 <Box minHeight="95vh">
@@ -96,11 +93,6 @@ const VideoDetail = () => {
                             We're sorry for the inconvenience. The API which is providing this data is not functioning properly anymore. We're migrating to a newer API so you can enjoy unlimited content!</Typography>}
                 </Box>
             </Box>
-        )
-    }
-    else {
-        return (
-            <Loader />
         )
     }
 

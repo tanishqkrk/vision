@@ -12,11 +12,13 @@ const ChannelDetail = () => {
     const [isLoadingChannelDetail, setIsLoadingChannelDetail] = useState(true)
     const [isErrorChannelDetail, setIsErrorChannelDetail] = useState(false)
     const [videos, setVideos] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false)
 
     const { id } = useParams();
     useEffect(() => {
         fetchAPI(`channels?part=snippet&id=${id}`)
             .then((data) => {
+                setIsLoaded(true)
                 setChannelDetail(data?.items[0]);
                 setIsLoadingChannelDetail(false);
                 setIsErrorChannelDetail(false);
@@ -57,7 +59,7 @@ const ChannelDetail = () => {
                 <ChannelCard channelContent={channelDetail} />
                 <h6 className="subcount"> {subcount.toLocaleString('en-US')} Subscribers</h6>
                 <p className="channelDesc"> {channelDetail.snippet.description} </p>
-                <Videos videos={videos}></Videos>
+                {isLoaded && <Videos videos={videos}></Videos>}
             </Box>
         )
     }
