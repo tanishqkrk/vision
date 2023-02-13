@@ -16,7 +16,8 @@ const VideoDetail = () => {
 
     useEffect(() => {
         fetchAPI(`videos?part=snippet,statistics&id=${id}`)
-            .then(data => {
+            .then((data) => {
+                console.log(data);
                 setIsVideoDetailLoading(false)
                 setVideoDetail(data.items[0])
             })
@@ -31,8 +32,8 @@ const VideoDetail = () => {
             })
     }, [id])
 
-    if (!isVideoDetailLoading && !isVideosLoading) {
-        const { snippet: { title, channelId, channelTitle }, statistics: { viewCount, likeCount } } = videoDetail;
+    if (videoDetail || videos) {
+        const { snippet: { title, channelId, channelTitle }, statistics: { viewCount, likeCount } } = videoDetail
         return (
             <Box minHeight="95vh">
                 <scrollToTop />
@@ -73,6 +74,13 @@ const VideoDetail = () => {
                 </Stack>
             </Box>
         )
+    }
+    else if (!videoDetail) {
+        <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems="center" >
+            {videos !== undefined ? <Videos videos={videos} direction="column" /> :
+                <Typography textAlign={"center"} p={2} style={{ background: "rgb(0, 119, 255)" }} variant="body1" fontWeight={600} color="#fff">
+                    We're sorry for the inconvenience. The API which is providing this data is not functioning properly anymore. We're migrating to a newer API so you can enjoy unlimited content!</Typography>}
+        </Box>
     }
     else {
         return (
