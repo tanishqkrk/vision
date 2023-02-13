@@ -2,19 +2,21 @@ import { Stack, Box } from '@mui/material'
 import VideoCard from './VideoCard'
 import ChannelCard from './ChannelCard'
 import PlaylistCard from './PlaylistCard'
+import { useState, useRef, useEffect } from 'react'
 
 const Videos = ({ videos }) => {
-    // console.log(videos);
+
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        videos && setLoaded(true)
+    }, [])
+
+    const videosContainer = useRef();
     return (
-        <div className='videos-container'
-        // direction="row"
-        // flexWrap="wrap"
-        // justifyContent="start"
-        // gap={2}
-        // overflowY="scroll"
-        >
+        <div ref={videosContainer} className='videos-container'>
             {
-                videos.map(
+                loaded && videos.map(
                     (item, index) => (
                         <div
                             style={{
