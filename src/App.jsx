@@ -18,10 +18,9 @@ const App = () => {
                     <Route path="/channel/:id" element={<ChannelDetail />} />
                     <Route path="/search/:searchTerm" element={<SearchFeed />} />
                 </Routes>
-                <div onClick={disappear} ref={alert} className="alert danger-alert">
+                {/* <div onClick={disappear} ref={alert} className="alert danger-alert">
                     <h3>The API that is providing data to run this application is malfunctioning, I'm currently migrating to a newer API, until then users can't access all the data, some videos and search feeds are not available. Sorry for the inconvenience</h3>
-                    {/* <a class="close">&times;</a> */}
-                </div>
+                </div> */}
             </Box>
         </BrowserRouter>
     )
