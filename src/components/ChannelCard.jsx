@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const ChannelCard = ({ channelContent }) => {
+
+    useEffect(() => {
+        document.title = channelContent.snippet.title
+    }, [channelContent])
 
     const channelURL = () => {
         if (channelContent?.id?.channelId === undefined) {
