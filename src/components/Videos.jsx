@@ -5,13 +5,14 @@ import PlaylistCard from './PlaylistCard'
 import { useState, useRef, useEffect } from 'react'
 
 const Videos = ({ videos }) => {
-
     const [loaded, setLoaded] = useState(false);
-
     useEffect(() => {
         videos && setLoaded(true);
     }, [])
 
+    useEffect(() => {
+        // console.log(videosContainer.current.scrollTop);
+    }, [videos])
 
     const videosContainer = useRef();
     return (

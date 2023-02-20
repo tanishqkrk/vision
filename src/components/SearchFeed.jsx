@@ -10,6 +10,12 @@ const SearchFeed = () => {
     const searchTerm = useParams();
 
     useEffect(() => {
+        if (searchTerm) {
+            document.title = `Search for ${searchTerm.searchTerm}`
+        }
+    }, [searchTerm])
+
+    useEffect(() => {
         fetchAPI(`search?part=snippet&q=${searchTerm.searchTerm}`)
             .then((data) => {
                 // console.log(data);

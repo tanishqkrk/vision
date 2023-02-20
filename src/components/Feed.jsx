@@ -11,9 +11,13 @@ const Feed = () => {
     useEffect(() => {
         fetchAPI(`search?part=snippet&q=${selectedCategory}`)
             .then((data) => {
-                setVideos(data.items)
+                setVideos(data.items);
             })
             .catch((err) => { console.log(err) })
+    }, [selectedCategory])
+
+    useEffect(() => {
+        document.title = selectedCategory;
     }, [selectedCategory])
 
     return (

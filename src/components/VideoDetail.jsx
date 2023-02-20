@@ -14,17 +14,23 @@ const VideoDetail = () => {
     const [videos, setVideos] = useState(null);
     const [isVideosLoading, setIsVideosLoading] = useState(true)
 
+    useEffect(() => {
+        if (videoDetail && !isVideosLoading) {
+            document.title = videoDetail.snippet.title
+        }
+    }, [videoDetail])
 
     useEffect(() => {
         fetchAPI(`videos?part=snippet,statistics&id=${id}`)
             .then((data) => {
                 setIsVideoDetailLoading(false)
                 setVideoDetail(data.items[0])
+                document.title = data.items[0].snippet.title
             })
             .catch((err) => {
                 console.log(err);
             })
-
+        document.documentElement.scrollTop = 0
     }, [id])
 
     useEffect(() => {
@@ -43,7 +49,6 @@ const VideoDetail = () => {
             const { snippet: { title, channelId, channelTitle }, statistics: { viewCount, likeCount } } = videoDetail
             return (
                 <Box minHeight="95vh">
-                    <scrollToTop />
                     <Stack direction={{
                         xs: 'column',
                         md: 'row'
